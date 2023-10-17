@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Dominio.Passegger
 {
-    public enum TycketClass { First,Second}
+   
     public class Passegger:Person
     {
     
         public List<Luggage> Luggages { get; set; }
         public int Etá { get; set; }
-        public string IdTicket { get; set; }
+        public Ticket Ticket { get; set; }
 
         public bool IsValid()
         {
