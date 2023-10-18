@@ -5,18 +5,19 @@ namespace Core
 {
     public interface IRepository
     {
+        Task<Account?> GetAccout(Account account);
         Task<bool> NewAccout(Account account);
         Task<bool> ChangeAccout(Account account);
 
-        Task<bool> GetTicket(string idTicket);
-        Task<bool> AddNewTicketToAccount(string IdAccout,Ticket passegger);
+        Task<Ticket?> GetTicket(Guid idTicket);
+        Task<bool> AddNewTicketToAccount(Guid IdAccout,Ticket passegger);
         Task<bool> DeleteTicketToRoute(string idPassegger);
         Task<bool> ChangeTicketToRoute(string idPassegger, Ticket changedPassegger);
 
-        Task<Result<FlightRoute>> GetRoute(string idRoute);
+        Task<FlightRoute?> GetRoute(Guid idRoute);
         Task<bool> NewRoute(Aereo aereo, FlightRoute route);
-        Task<bool> DeleteRoute(string idRoute);
-        Task<bool> ChangeRoute(string idRoute, FlightRoute changedRoute);
+        Task<bool> DeleteRoute(Guid idRoute);
+        Task<bool> ChangeRoute(Guid idRoute, FlightRoute changedRoute);
 
     }
 

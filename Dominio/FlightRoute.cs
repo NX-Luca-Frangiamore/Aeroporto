@@ -1,4 +1,7 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
 namespace Dominio
 {
     public record City(string Name,string Cap);
@@ -6,7 +9,9 @@ namespace Dominio
     public record Ora(int h,int mm);
     public class FlightRoute
     {
-        public string Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
         public required City From { get; set; }
         public required City To { get; set; }
         public required Data Data { get; set; }

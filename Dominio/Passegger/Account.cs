@@ -9,10 +9,10 @@ namespace Dominio.Passegger
 {
     public class Account:Person
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }= Guid.NewGuid();
         public string Username { get; set; }
         public string Password { get; set; }
-        public List<Ticket> Tickets { get; set; }
+        public List<Ticket> Tickets { get; set; } = new();
         public bool IsValid()
         {
             var v = new AccountValidator().Validate(this);

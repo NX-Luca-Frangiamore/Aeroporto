@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Dominio.Passegger
 {
-
+    public enum TycketClass { First, Second }
     public class Ticket
     {
-        public string Id { get; set; }
-        public List<Luggage> Luggages { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public virtual List<Luggage> Luggages { get; set; } = new();
         public int Seat { get; set; }
         public string TycketClassTicket { get; set; }
 
