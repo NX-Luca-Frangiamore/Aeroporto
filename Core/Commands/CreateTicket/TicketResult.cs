@@ -1,8 +1,8 @@
 ﻿namespace Core.Commands.CreatePassegger
 {
-    class PasseggerResult {
+    class TicketResult {
         public string IdPassegger { get; set; }
-        public PasseggerResult(string idPassegger) {
+        public TicketResult(string idPassegger) {
             this.IdPassegger = idPassegger;
         }
     
