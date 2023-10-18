@@ -61,7 +61,6 @@ jobs:
     steps:
       - name: Install dependencies
         run: dotnet restore
-        working-directory: Core
       - name: Build
         run: dotnet build
       - name: Test with the dotnet CLI
