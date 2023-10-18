@@ -63,6 +63,7 @@ jobs:
       - name: Setup dotnet
       - name: Install dependencies
         run: dotnet restore
+        working-directory: ./
       - name: Build
         run: dotnet build
       - name: Test with the dotnet CLI
