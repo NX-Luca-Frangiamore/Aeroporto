@@ -4,19 +4,18 @@ using SimpleSoft.Mediator;
 
 namespace Core.Commands.CreatePassegger
 {
-    public enum TycketClass { First, Second }
-    internal class CreateTicketCommand : Command<Result<TicketResult>>
+    public class CreateTicketCommand : Command<Result<CreateTicketResult>>
     {
-        public string IdRoute { get;init; }
+        public required Guid IdRoute { get;init; }
         public List<CreateLuggageCommand>? Luggages { get; init; }
-        public TycketClass TypeTicket { get; init; }
-        public string IdAccount {  get; init; } 
+        public required string TypeTicket { get; init; }
+        public required Guid IdAccount {  get; init; } 
     }
 
-    class CreateLuggageCommand
+    public class CreateLuggageCommand
     {
-        public float Peso { get; init; }
-        public float Dimensione { get; init; }
+        public required float Peso { get; init; }
+        public required float Dimensione { get; init; }
     }
    
 }

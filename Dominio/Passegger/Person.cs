@@ -8,7 +8,6 @@ namespace Dominio.Passegger
 {
     public class Person
     {
-        public string Id { get; set; }
         public string Name { get; set; }
         public string Cognome { get; set; }
         public int Etá { get; set; }

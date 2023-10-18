@@ -9,16 +9,16 @@ using FluentResults;
 namespace Core.Commands.CreatePassegger
 {
 
-    internal class CreateTicketHandler : ICommandHandler<CreateTicketCommand, Result<TicketResult>>
+    public class CreateTicketHandler : ICommandHandler<CreateTicketCommand, Result<CreateTicketResult>>
     {
         private readonly IRepository _repository;
         public CreateTicketHandler(IRepository repository)
         {
             _repository = repository;
         }
-        public async Task<Result<TicketResult>> HandleAsync(CreateTicketCommand cmd, CancellationToken ct)
+        public async Task<Result<CreateTicketResult>> HandleAsync(CreateTicketCommand cmd, CancellationToken ct)
         {
-            var TicketResult = await CreateTicket(cmd.IdRoute, cmd.TypeTicket.ToString());
+            var TicketResult = await CreateTicket(cmd.IdRoute, cmd.TypeTicket);
             if (TicketResult.IsFailed)
                 return Result.Fail(TicketResult.Errors);
             var Ticket = TicketResult.Value;
@@ -30,7 +30,7 @@ namespace Core.Commands.CreatePassegger
                 var ResultRoute = await _repository.AddNewTicketToAccount(cmd.IdAccount, Ticket);
                 {
                     if (ResultRoute)
-                        return Result.Ok(new TicketResult(Ticket.Id));
+                        return Result.Ok(new CreateTicketResult(Ticket.Id,Ticket.Seat));
                 }
             }
             return Result.Fail("Impossibile creare il ticket");
@@ -50,15 +50,17 @@ namespace Core.Commands.CreatePassegger
                 p.Luggages.Add(luggage);
             };
         }
-        private async Task<Result<Ticket>> CreateTicket(string idRoute, string typeTicket)
+        private async Task<Result<Ticket>> CreateTicket(Guid idRoute, string typeTicket)
         {
             var Route = await _repository.GetRoute(idRoute);
-            if (Route.Value.NSeatsLeft > 0)
+            if(Route is null) return Result.Fail("Rotta non esistente");
+
+            if (Route.NSeatsLeft > 0)
             {
                 var NewTicket = new Ticket()
                 {
                     TycketClassTicket = typeTicket,
-                    Seat = Route.Value.NSeatsLeft
+                    Seat = Route.NSeatsLeft
                 };
                 if (new TicketValidator().Validate(NewTicket).IsValid)
                 {
