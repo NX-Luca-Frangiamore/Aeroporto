@@ -6,7 +6,6 @@ namespace Core.Commands.CreatePassegger
 {
     public class CreateTicketCommand : Command<Result<CreateTicketResult>>
     {
-
         public required Guid IdRoute { get;init; }
         public List<CreateLuggageCommand>? Luggages { get; init; }
         public required string TypeTicket { get; init; }
