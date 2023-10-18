@@ -60,7 +60,7 @@ jobs:
 
     steps:
       - name: Install dependencies
-        run: dotnet restore Core/Core.csproj
+        run: dotnet restore ./Core/Core.csproj
       - name: Build
         run: dotnet build
       - name: Test with the dotnet CLI
