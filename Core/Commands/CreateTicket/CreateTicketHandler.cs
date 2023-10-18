@@ -9,14 +9,14 @@ using FluentResults;
 namespace Core.Commands.CreatePassegger
 {
 
-    public class CreateTicketHandler : ICommandHandler<CreateTicketCommand, Result<TicketResult>>
+    public class CreateTicketHandler : ICommandHandler<CreateTicketCommand, Result<CreateTicketResult>>
     {
         private readonly IRepository _repository;
         public CreateTicketHandler(IRepository repository)
         {
             _repository = repository;
         }
-        public async Task<Result<TicketResult>> HandleAsync(CreateTicketCommand cmd, CancellationToken ct)
+        public async Task<Result<CreateTicketResult>> HandleAsync(CreateTicketCommand cmd, CancellationToken ct)
         {
             var TicketResult = await CreateTicket(cmd.IdRoute, cmd.TypeTicket);
             if (TicketResult.IsFailed)
@@ -30,7 +30,7 @@ namespace Core.Commands.CreatePassegger
                 var ResultRoute = await _repository.AddNewTicketToAccount(cmd.IdAccount, Ticket);
                 {
                     if (ResultRoute)
-                        return Result.Ok(new TicketResult(Ticket.Id,Ticket.Seat));
+                        return Result.Ok(new CreateTicketResult(Ticket.Id,Ticket.Seat));
                 }
             }
             return Result.Fail("Impossibile creare il ticket");

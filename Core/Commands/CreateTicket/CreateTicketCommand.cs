@@ -4,7 +4,7 @@ using SimpleSoft.Mediator;
 
 namespace Core.Commands.CreatePassegger
 {
-    public class CreateTicketCommand : Command<Result<TicketResult>>
+    public class CreateTicketCommand : Command<Result<CreateTicketResult>>
     {
         public required Guid IdRoute { get;init; }
         public List<CreateLuggageCommand>? Luggages { get; init; }
