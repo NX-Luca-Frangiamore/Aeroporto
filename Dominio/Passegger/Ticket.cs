@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace Dominio.Passegger
 {
-   
-    public class Passegger:Person
+
+    public class Ticket
     {
-    
+        public string Id { get; set; }
         public List<Luggage> Luggages { get; set; }
-        public int Etá { get; set; }
-        public Ticket Ticket { get; set; }
+        public int Seat { get; set; }
+        public string TycketClassTicket { get; set; }
 
         public bool IsValid()
         {
-            var v = new PasseggerValidator().Validate(this);
+            var v = new TicketValidator().Validate(this);
             return v.IsValid;
         }
     }

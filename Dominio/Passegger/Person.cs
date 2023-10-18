@@ -11,5 +11,7 @@ namespace Dominio.Passegger
         public string Id { get; set; }
         public string Name { get; set; }
         public string Cognome { get; set; }
+        public int Etá { get; set; }
+       
     }
 }
